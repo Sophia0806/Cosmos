@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Account" representedClassName="Account" syncable="YES">
+        <attribute name="animal" optional="YES" attributeType="String"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="password" optional="YES" attributeType="String"/>
+        <attribute name="username" optional="YES" attributeType="String"/>
+        <relationship name="releasePost" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Post" inverseName="postBy" inverseEntity="Post"/>
+        <relationship name="releaseReply" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Reply" inverseName="accountOwner" inverseEntity="Reply"/>
+        <relationship name="writeDiary" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Diary" inverseName="writeBy" inverseEntity="Diary"/>
+    </entity>
+    <entity name="Diary" representedClassName="Diary" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String"/>
+        <attribute name="day" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="month" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="mood" optional="YES" attributeType="String"/>
+        <attribute name="weather" optional="YES" attributeType="String"/>
+        <attribute name="year" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="writeBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="writeDiary" inverseEntity="Account"/>
+    </entity>
+    <entity name="Entity" representedClassName="Entity" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="Post" representedClassName="Post" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="time" optional="YES" attributeType="String"/>
+        <relationship name="haveReplies" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Reply" inverseName="postOwner" inverseEntity="Reply"/>
+        <relationship name="postBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="releasePost" inverseEntity="Account"/>
+    </entity>
+    <entity name="Reply" representedClassName="Reply" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String"/>
+        <attribute name="floor" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="time" optional="YES" attributeType="String"/>
+        <relationship name="accountOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="releaseReply" inverseEntity="Account"/>
+        <relationship name="postOwner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Post" inverseName="haveReplies" inverseEntity="Post"/>
+    </entity>
+    <elements>
+        <element name="Account" positionX="-89.18212890625" positionY="-38.62786865234375" width="128" height="149"/>
+        <element name="Entity" positionX="3770.739807128906" positionY="-95.96157836914062" width="128" height="44"/>
+        <element name="Post" positionX="208.643798828125" positionY="77.78375244140625" width="128" height="104"/>
+        <element name="Reply" positionX="117.4063110351562" positionY="-193.6191101074219" width="128" height="119"/>
+        <element name="Diary" positionX="117" positionY="-36" width="128" height="149"/>
+    </elements>
+</model>
